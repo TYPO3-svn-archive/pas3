@@ -1,0 +1,17 @@
+/*------------------------------------*\
+//	$VARS
+\*------------------------------------*/
+$base-font-size:    16; // Value in pixels
+$base-line-height:  24; // Value in pixels
+$brand-color:       #e6007e;
+$base-color:		#fff;
+$brand-face:        Arial, Helvetica, sans-serif;
+
+// We work these bits out for you!
+$em-base-font-size:     $base-font-size/16;                 // Divide  our chosen font-size by the browser's typical default.
+$em-base-line-height:   $base-line-height/$base-font-size;  // Set a proportional line-height based on our inputs.
+
+// Define the grid "these are the default values"
+$column_width: 		60px;
+$column_num: 		12;
+$gutter_width: 		20px;

@@ -1,0 +1,1178 @@
+@charset "UTF-8";
+/*---------------------------------------------------*\
+  rlnd.frnk
+\*---------------------------------------------------*/
+/*
+Author:         Roland Franke
+Twitter:        @rolandfranke
+Author URL:       www.rolandfranke.nl
+Version:        1.0
+Date:         14 May 2012
+Copyright 2012 Roland Franke
+
+Based on the work of: Harry Roberts
+Twitter:              @csswizardry
+Author URL:           csswizardry.com
+*/
+/*---------------------------------------------------*\
+  CONTENTS
+\*---------------------------------------------------*/
+/*
+Setup
+  RESET...........Let’s bosh some defaults in there.
+  SHARED..........Variables in vanilla CSS.
+  CLEARFIX
+
+Objects and abstractions
+  NAV
+  MEDIA
+  ISLAND
+  TAG
+
+Generic
+  MAIN............HTML and BODY elements, wrappers etc.
+  TYPE............Top-level typographical styles.
+  IMAGES
+  FORMS
+  TABLES
+
+Specific
+  HEADER
+  SITE-NAV
+  SUB-NAV
+  LOGO
+  PAGE
+  FOOTER
+  FOOTER-NAV
+  SOCIAL..........Twitter links and the like.
+  
+Other
+  BRAND...........Brand colours and fonts.
+  MISC............Helper classes etc.
+*/
+/*---------------------------------------------------*\
+  $RESET
+\*---------------------------------------------------*/
+/* A more considered reset; more of a restart... */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr,
+a, abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strong, sub, sup, tt, var,
+b, u, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer,
+header, hgroup, menu, nav, section {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+strong, b, mark {
+  font-weight: 600;
+  font-style: inherit;
+}
+
+em, i, cite, q, address, dfn, var {
+  font-style: italic;
+  font-weight: inherit;
+}
+
+abbr[title], dfn[title] {
+  cursor: help;
+  border-bottom: 1px dotted;
+}
+
+ins {
+  border-bottom: 1px solid;
+}
+
+a, u, ins {
+  text-decoration: none;
+}
+
+del, s {
+  text-decoration: line-through;
+}
+
+pre, code, samp, kbd {
+  font-family: "Inconsolata", "Monaco", "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+}
+
+img {
+  border: none;
+  font-style: italic;
+}
+
+input,
+select, option, optgroup,
+textarea {
+  font: inherit;
+}
+
+/* Form items have always missed cursor interactions... */
+label,
+input,
+textarea,
+button {
+  cursor: pointer;
+}
+
+.text-input:active,
+.text-input:focus,
+textarea:active,
+textarea:focus {
+  cursor: text;
+}
+
+/*---------------------------------------------------*\
+  $SHARED
+\*---------------------------------------------------*/
+/* Shared margins */
+.sass-margin-bottom, .media, .island,
+.islet, h1, h2, h3, h4, h5, h6, hgroup, .source, pre, figure, fieldset, .fields > li, table, hr,
+ul, ol, dd,
+p {
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+}
+
+.sass-margin-left,
+ul, ol, dd {
+  margin-left: 1.5em;
+}
+
+/* Shared colours */
+.sass-base-color, html, .twitter-link {
+  color: white;
+}
+
+.sass-brand-color, a, .site-nav li a:hover, .site-nav li a.act, .sub-nav li.active a, .sub-nav a:hover, .sub-nav a.act, .twitter-link:hover {
+  color: #e6007e;
+}
+
+.sass-reversed, .rev,
+.rev a, pre, pre code {
+  background-color: #333;
+  color: #ddd;
+}
+
+.sass-code-color,
+code, samp, kbd {
+  color: #781;
+}
+
+/* Shared fonts. */
+.sass-brand-face {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sass-small-font,
+small, figcaption,
+.source,
+table,
+legend,
+label,
+.btn,
+.footer-nav {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
+
+/* Shared rounds */
+.sass-rounds, .island,
+.islet, pre, figure img, .avatar, .fancy-img:after, fieldset, .text-input,
+textarea, .btn {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+
+/*---------------------------------------------------*\
+  $CLEARFIX
+\*---------------------------------------------------*/
+/* Big up @necolas: nicolasgallagher.com/micro-clearfix-hack */
+.island:before, .islet:before,
+.island:after, .islet:after,
+.media:before,
+.media:after,
+.cf:before,
+.wrapper:before,
+.viewer:before,
+.indd_sv2_body:before,
+.listview:before,
+.tx-p3ga-pi1:before,
+footer:before,
+.indd_sv2_footer:before,
+.cf:after,
+.wrapper:after,
+.viewer:after,
+.indd_sv2_body:after,
+.listview:after,
+.tx-p3ga-pi1:after,
+footer:after,
+.indd_sv2_footer:after {
+  content: "";
+  display: table;
+}
+
+.island:after, .islet:after,
+.media:after,
+.cf:after,
+.wrapper:after,
+.viewer:after,
+.indd_sv2_body:after,
+.listview:after,
+.tx-p3ga-pi1:after,
+footer:after,
+.indd_sv2_footer:after {
+  clear: both;
+}
+
+island, .islet,
+.media,
+.cf,
+.wrapper,
+.viewer,
+.indd_sv2_body,
+.listview,
+.tx-p3ga-pi1,
+footer,
+.indd_sv2_footer {
+  zoom: 1;
+}
+
+/*---------------------------------------------------*\
+  $NAV
+\*---------------------------------------------------*/
+/* As per: csswizardry.com/2011/09/the-nav-abstraction */
+.nav {
+  list-style: none;
+  margin-left: 0;
+}
+.nav > li {
+  display: inline;
+}
+.nav a {
+  display: inline-block;
+}
+
+/*---------------------------------------------------*\
+  $MEDIA
+\*---------------------------------------------------*/
+/* As per: stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code */
+.media {
+  display: block;
+}
+
+.img {
+  float: left;
+  margin-right: 16px;
+  margin-right: 1rem;
+}
+
+/* Reversed image location (right instead of left). */
+.img-rev {
+  float: right;
+  margin-left: 16px;
+  margin-left: 1rem;
+}
+
+.img img {
+  display: block;
+}
+
+.body {
+  overflow: hidden;
+}
+
+.body > :last-child {
+  margin-bottom: 0;
+}
+
+/*
+Islets have a slightly smaller padding value than normal.
+With this in mind we make the `.img` spacing a little smaller for visual consistency.
+*/
+.islet .img {
+  margin-right: 8px;
+  margin-right: .5rem;
+}
+
+.islet .img-rev {
+  margin-left: 8px;
+  margin-left: .5rem;
+}
+
+/*---------------------------------------------------*\
+  $ISLAND
+\*---------------------------------------------------*/
+/* As per csswizardry.com/2011/10/the-island-object */
+.island,
+.islet {
+  display: block;
+}
+
+.island,
+pre,
+fieldset {
+  padding: 24px;
+  padding: 1.5rem;
+}
+
+.island > :last-child,
+.islet > :last-child,
+.island > .wrapper > :last-child,
+.islet > .wrapper > :last-child {
+  margin-bottom: 0;
+}
+
+/*
+For smaller areas of boxed off content use the `.islet` class, i.e.:
+<div class=islet></div>
+*/
+.islet {
+  padding: 12px;
+  padding: .75rem;
+}
+
+/* Full-width, whole page sections (e.g. header, footer etc). */
+.region {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
+
+/* Reversed out islands. */
+.rev a {
+  text-decoration: underline;
+}
+.rev a:hover {
+  color: #fff;
+}
+
+/*---------------------------------------------------*\
+  $MAIN
+\*---------------------------------------------------*/
+html {
+  font: 300 1em/1.5 Arial, Helvetica, sans-serif;
+  background-color: #7f99b2;
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 10px;
+  background: url('../img/css/bg-main.png?1337605539') top center, -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(15%, #7f99b2), color-stop(35%, #b2c2d1), color-stop(65%, #b2c2d1), color-stop(85%, #7f99b2));
+  background: url('../img/css/bg-main.png?1337605539') top center, -webkit-linear-gradient(left center, #7f99b2 15%, #b2c2d1 35%, #b2c2d1 65%, #7f99b2 85%);
+  background: url('../img/css/bg-main.png?1337605539') top center, -moz-linear-gradient(left center, #7f99b2 15%, #b2c2d1 35%, #b2c2d1 65%, #7f99b2 85%);
+  background: url('../img/css/bg-main.png?1337605539') top center, -o-linear-gradient(left center, #7f99b2 15%, #b2c2d1 35%, #b2c2d1 65%, #7f99b2 85%);
+  background: url('../img/css/bg-main.png?1337605539') top center, -ms-linear-gradient(left center, #7f99b2 15%, #b2c2d1 35%, #b2c2d1 65%, #7f99b2 85%);
+  background: url('../img/css/bg-main.png?1337605539') top center, linear-gradient(left center, #7f99b2 15%, #b2c2d1 35%, #b2c2d1 65%, #7f99b2 85%);
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 960px;
+}
+
+.wrapper > aside {
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 10px;
+  width: 220px !important;
+}
+
+.sidebar {
+  background: url('../img/css/bg-sidebar.png?1337601727') black bottom center no-repeat;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  height: 520px;
+  margin-bottom: 49px;
+  padding-bottom: 120px;
+}
+
+/*---------------------------------------------------*\
+  $TYPE
+\*---------------------------------------------------*/
+@font-face {
+  font-family: 'MyriadProBold';
+  src: url("../fonts/myriadpro-bold-webfont.eot");
+  src: url("../fonts/myriadpro-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/myriadpro-bold-webfont.woff") format("woff"), url("../fonts/myriadpro-bold-webfont.ttf") format("truetype"), url("../fonts/myriadpro-bold-webfont.svg#MyriadProBold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Headings */
+/* Generic heading class, as per: jsfiddle.net/csswizardry/yFQDP */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+hgroup .hN {
+  margin-bottom: 0;
+}
+
+h1, .alpha {
+  font-size: 32px;
+  font-size: 2rem;
+  line-height: 1.5;
+  /* 48px */
+}
+
+h2, .beta {
+  font-size: 20px;
+  font-size: 1.25rem;
+  font-family: 'MyriadProBold';
+  line-height: 1;
+  /* 24px */
+}
+
+h3, .gamma {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  /* 24px */
+}
+
+h4, .delta, .p3gaDocTitle {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  /* 24px */
+}
+
+h5, .epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  /* 16px */
+}
+
+h6, .zeta {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  /* 16px */
+}
+
+/* Small */
+small, .milli {
+  line-height: 2;
+  /* 24px */
+}
+
+/* Links */
+a:hover,
+a:focus,
+a:active {
+  text-decoration: underline;
+}
+
+a:focus,
+a:active,
+.btn:focus,
+.btn:active {
+  position: relative;
+  top: 1px;
+}
+
+/* Basic styling for any 'current' links. */
+.current a {
+  cursor: text;
+  text-decoration: underline;
+}
+
+/* Lists */
+li > ul,
+li > ol {
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: 600;
+}
+
+/* Quotes */
+/* Big up @boblet: html5doctor.com/blockquote-q-cite */
+q {
+  quotes: "‘" "’" "“" "”";
+}
+
+q:before {
+  content: "‘";
+  content: open-quote;
+}
+
+q:after {
+  content: "’";
+  content: close-quote;
+}
+
+q q:before {
+  content: "“";
+  content: open-quote;
+}
+
+q q:after {
+  content: "”";
+  content: close-quote;
+}
+
+blockquote {
+  quotes: "“" "”";
+}
+
+blockquote p:before {
+  content: "“";
+  content: open-quote;
+}
+
+blockquote p:after {
+  content: "";
+  content: no-close-quote;
+}
+
+blockquote p:last-of-type:after {
+  content: "”";
+  content: close-quote;
+}
+
+blockquote {
+  text-indent: -0.4em;
+  padding-left: 1.5em;
+  border-left: 5px solid #ccc;
+}
+
+.source {
+  display: block;
+  text-indent: 0;
+  margin-top: -24px;
+  margin-top: -1.5rem;
+  line-height: 2;
+}
+
+.source:before {
+  content: "—";
+}
+
+/* Code */
+pre {
+  overflow: auto;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset;
+}
+
+pre code {
+  background: none;
+}
+
+pre mark {
+  color: #fff;
+  background: none;
+  border-bottom: 2px solid;
+}
+
+.code-comment {
+  color: #666;
+}
+
+/*---------------------------------------------------*\
+  $IMAGES
+\*---------------------------------------------------*/
+img {
+  max-width: 100%;
+}
+
+/* Figures */
+figure img {
+  display: block;
+}
+
+/* Nice fancy images! */
+.fancy-img {
+  position: relative;
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+.fancy-img:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
+}
+
+/*---------------------------------------------------*\
+  $FORMS
+\*---------------------------------------------------*/
+/* Major */
+fieldset {
+  border: 1px solid #ccc;
+}
+
+legend {
+  font-weight: 600;
+  line-height: 2;
+}
+
+/* Field groups */
+/*
+Wrap sections of forms (usually a label-input pairing) like so:
+<form>
+
+  <fieldset>
+
+    <ul class=fields>
+
+      <li>
+        [form items]
+      </li>
+
+      <li>
+        [form items]
+      </li>
+
+    </ul>
+
+  </fieldset>
+
+</form>
+*/
+.fields {
+  list-style: none;
+  margin: 0;
+}
+
+.fields > li:last-child {
+  margin-bottom: 0;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  line-height: 2;
+  display: block;
+}
+
+.check-label {
+  display: inline-block;
+}
+
+/*
+Additional help text in form labels:
+<label for=name>Name <small class=additional>Full name</small></label>
+*/
+.additional {
+  display: block;
+  font-weight: normal;
+}
+
+/* Inputs */
+.text-input,
+textarea {
+  border: 2px solid #ccc;
+  width: 100%;
+  padding: 4px;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.text-input:active,
+.text-input:focus,
+textarea:active,
+textarea:focus {
+  outline: none;
+  border-color: #e6007e;
+}
+
+textarea {
+  height: 36px;
+  /* Two lines of text plus padding. */
+  resize: none;
+}
+
+textarea:active,
+textarea:focus,
+textarea:not(:empty) {
+  height: 132px;
+  /* Five lines of text plus padding. */
+}
+
+/* Checkboxes */
+/*
+List of checkboxes and radio buttons are put in a list with a class of check-list, e.g.:
+<ul class=check-list>
+
+  <li>
+    <input>
+    <label></label>
+  </li>
+
+  <li>
+    <input>
+    <label></label>
+  </li>
+
+  <li>
+    <input>
+    <label></label>
+  </li>
+
+</ul>
+*/
+.check-list {
+  list-style: none;
+  margin: 0;
+}
+
+/* Buttons */
+.btn {
+  background-color: #0587bd;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #009ee0), color-stop(100%, #0587bd));
+  background: -webkit-linear-gradient(top, #009ee0 0%, #0587bd 100%);
+  background: -moz-linear-gradient(top, #009ee0 0%, #0587bd 100%);
+  background: -o-linear-gradient(top, #009ee0 0%, #0587bd 100%);
+  background: -ms-linear-gradient(top, #009ee0 0%, #0587bd 100%);
+  background: linear-gradient(top, #009ee0 0%, #0587bd 100%);
+  border: 1px solid #727678;
+  color: #fff;
+  display: inline-block;
+  font-size: 15px;
+  font-size: 0.938rem;
+  font-weight: 500;
+  line-height: 1.8;
+  padding: 0 0.5em;
+  -webkit-appearance: none;
+}
+
+.btn-secondary {
+  background: none;
+  color: inherit;
+}
+
+.thanks {
+  position: absolute;
+  left: -99999px;
+}
+
+.comment-btn:hover + .thanks {
+  position: static;
+}
+
+#optionsForm {
+  height: 450px;
+}
+#optionsForm input {
+  float: right;
+  margin-left: 10px;
+}
+#optionsForm label {
+  display: inline;
+}
+
+/*---------------------------------------------------*\
+  $TABLES
+\*---------------------------------------------------*/
+table {
+  width: 100%;
+}
+
+tbody tr:nth-of-type(even) td {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+th {
+  text-align: left;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 1em;
+}
+
+thead th {
+  border-bottom-width: 2px;
+  border-bottom-color: #999;
+}
+
+tbody th {
+  border-right-width: 2px;
+  border-right-color: #999;
+}
+
+/*---------------------------------------------------*\
+  $HEADER
+\*---------------------------------------------------*/
+.header {
+  margin-bottom: 30px;
+}
+
+.login {
+  text-align: right;
+}
+.login small {
+  font-size: 10px;
+  font-size: 0.625rem;
+}
+
+/*---------------------------------------------------*\
+  $SITE-NAV
+\*---------------------------------------------------*/
+.site-nav {
+  overflow: hidden;
+  font-weight: 600;
+  margin-bottom: 0;
+  padding-top: 35px;
+}
+
+.site-nav li {
+  margin-right: -3px;
+}
+.site-nav li:after {
+  content: "|";
+}
+.site-nav li:first-child a {
+  padding-left: 0;
+}
+.site-nav li:last-child:after {
+  content: "";
+}
+.site-nav li:last-child a {
+  padding-right: 0;
+}
+.site-nav li a {
+  font-size: 18px;
+  font-size: 1.125rem;
+  color: white;
+  padding: 0 10px;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+.site-nav li a:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+/*---------------------------------------------------*\
+  $SUB-NAV
+\*---------------------------------------------------*/
+.sub-nav a {
+  color: white;
+  padding: 0;
+  text-decoration: none;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+.sub-nav a:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.sub-nav a:after {
+  content: " \25b8";
+  color: #009fe3;
+}
+
+/*---------------------------------------------------*\
+  $LOGO
+\*---------------------------------------------------*/
+.logo {
+  display: block;
+  margin: 32px 0 70px 22px;
+}
+
+/*---------------------------------------------------*\
+  $PAGE
+\*---------------------------------------------------*/
+.page {
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 10px;
+  width: 700px !important;
+}
+
+.viewer, .indd_sv2_body {
+  margin-bottom: 14px;
+}
+
+.preview,
+.paginator, .previewDetail, .indd_sv2_body_le, .indd_sv2_steps, #previewFrame {
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 10px;
+  width: 380px !important;
+  margin-left: 0;
+  text-align: center;
+}
+
+#previewFrame {
+  padding: 0 !important;
+}
+
+.previewbglayerblocks {
+  height: auto !important;
+  width: auto !important;
+}
+
+.type, .select, .indd_sv2_body_ri, .indd_sv2_controls, #optionsForm {
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 10px;
+  width: 300px !important;
+  margin-right: 0;
+  text-align: right;
+}
+
+.indd_sv2_body > div:last-child {
+  display: inline;
+  float: left;
+  position: relative;
+  margin: 0 10px;
+  width: 300px !important;
+  margin-right: 0;
+  text-align: right;
+}
+
+.nav-selector {
+  line-height: 0;
+}
+
+.nav-selector > li {
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.nav-selector > li:last-child {
+  margin-bottom: 0;
+}
+
+.nav-selector img {
+  border: 1px solid #000;
+  -webkit-box-shadow: 0 0 4px rgba(125, 125, 125, 0.8);
+  -moz-box-shadow: 0 0 4px rgba(125, 125, 125, 0.8);
+  box-shadow: 0 0 4px rgba(125, 125, 125, 0.8);
+}
+
+.nav-selector a {
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  border: 3px solid transparent;
+}
+.nav-selector a:hover {
+  border: 3px solid #e6007e;
+}
+
+.listview {
+  margin-bottom: 35px;
+}
+
+.infotext {
+  font-size: 12px;
+  font-size: 0.75rem;
+  color: #fff !important;
+  width: auto !important;
+}
+
+.listAdminBox {
+  background-color: transparent !important;
+  border: none !important;
+  margin: 7px 0 21px;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+.listElement {
+  float: left;
+  height: auto !important;
+  margin: 0 10px;
+}
+
+.tx-pagebrowse-pi1 {
+  margin-bottom: 14px;
+}
+
+.indd_sv2_selection {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+.p3gaDocTitle {
+  margin-bottom: 14px;
+}
+
+.indd_sv2_steps {
+  min-height: 1px;
+}
+
+/*---------------------------------------------------*\
+  $FOOTER
+\*---------------------------------------------------*/
+footer, .indd_sv2_footer {
+  margin-bottom: 14px;
+}
+
+/*---------------------------------------------------*\
+  $FOOTER-NAV
+\*---------------------------------------------------*/
+.footer-nav {
+  color: #999;
+  margin-bottom: 0;
+}
+
+.footer-nav li:before {
+  content: "|";
+}
+
+.footer-nav li:first-child:before {
+  content: "";
+}
+
+.footer-nav a {
+  margin: 0 .5em;
+}
+
+/*---------------------------------------------------*\
+  $SOCIAL
+\*---------------------------------------------------*/
+/* Twitter links */
+/*
+<a href=http://twitter.com/csswizardry class="media twitter-link twitter-link-[sml|lrg]">
+  <img src=https://si.twimg.com/profile_images/1208250278/logo-sml_reasonably_small.jpg class="img avatar">
+  <span class=body>@csswizardry</span>
+</a>
+*/
+.twitter-link {
+  font-weight: 600;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}
+.twitter-link:hover {
+  text-decoration: none;
+}
+
+/* Small Twitter links... */
+.twitter-link-sml .img {
+  width: 1.5em;
+  /* Should equal current line-height at body copy. */
+  margin-right: 4px;
+}
+
+/* ...and larger ones. */
+.twitter-link-lrg {
+  font-size: 24px;
+  font-size: 1.5rem;
+}
+
+.twitter-link-lrg .img {
+  width: 48px;
+}
+
+.twitter-link-lrg .body {
+  line-height: 2;
+}
+
+/*---------------------------------------------------*\
+  $BRAND
+\*---------------------------------------------------*/
+.brand {
+  font-family: Arial, Helvetica, sans-serif !important;
+  color: #e6007e !important;
+}
+
+.brand-color,
+.brand-colour {
+  color: #e6007e !important;
+}
+
+.brand-face {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/*---------------------------------------------------*\
+  $MISC
+\*---------------------------------------------------*/
+.accessibility {
+  position: absolute;
+  left: -99999px;
+}
+
+hr {
+  border: 1px solid #fff;
+  border-bottom-color: #e3e3e3;
+  border-width: 1px 0;
+}
+
+.fr {
+  float: right!important;
+}
+
+.fl {
+  float: left!important;
+}
+
+::selection {
+  color: #fff;
+  background-color: #e6007e;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  color: #fff;
+  background-color: #e6007e;
+  text-shadow: none;
+}

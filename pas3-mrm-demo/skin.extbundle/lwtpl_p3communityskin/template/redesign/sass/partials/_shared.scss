@@ -1,0 +1,49 @@
+/*---------------------------------------------------*\
+	$SHARED
+\*---------------------------------------------------*/
+/* Shared margins */
+.sass-margin-bottom,
+ul,ol,dd,
+p{
+	@include margin-bottom($base-line-height);
+}
+.sass-margin-left,
+ul,ol,dd{
+	margin-left:1.5em;
+}
+
+/* Shared colours */
+.sass-base-color{
+	color:$base-color;
+}
+.sass-brand-color{
+	color:$brand-color;
+}
+.sass-reversed{
+	background-color:#333;
+	color:#ddd;
+}
+.sass-code-color,
+code,samp,kbd{
+	color:#781;
+}
+
+/* Shared fonts. */
+.sass-brand-face{
+	font-family:$brand-face;
+}
+.sass-small-font,
+small,figcaption,
+.source,
+table,
+legend,
+label,
+.btn,
+.footer-nav{
+	@include font-size(12);
+}
+
+/* Shared rounds */
+.sass-rounds{
+	@include border-radius(2px);
+}

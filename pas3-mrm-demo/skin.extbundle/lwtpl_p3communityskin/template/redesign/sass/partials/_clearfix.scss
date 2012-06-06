@@ -1,0 +1,23 @@
+/*---------------------------------------------------*\
+	$CLEARFIX
+\*---------------------------------------------------*/
+/* Big up @necolas: nicolasgallagher.com/micro-clearfix-hack */
+.island:before,.islet:before,
+.island:after,.islet:after,
+.media:before,
+.media:after,
+.cf:before,
+.cf:after{
+	content:"";
+	display:table;
+}
+.island:after,.islet:after,
+.media:after,
+.cf:after{
+	clear:both;
+}
+island,.islet,
+.media,
+.cf{
+	zoom:1;
+}

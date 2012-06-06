@@ -1,0 +1,46 @@
+/*---------------------------------------------------*\
+//	$MIXINS
+\*---------------------------------------------------*/
+// Create a rem-with-pixel-fallback font-size.
+@mixin font-size($px-val){
+	font-size:#{$px-val}px;
+	font-size:($px-val/$base-font-size) + rem;
+}
+
+// Create a rem-with-pixel-fallback margin-bottom.
+@mixin margin-bottom($px-val){
+	margin-bottom:#{$px-val}px;
+	margin-bottom:($px-val/$base-font-size) + rem;
+}
+
+// Grid
+$column_width: 		60px !default;
+$column_num: 		12 !default;
+$gutter_width: 		20px !default;
+
+@mixin grid($n) {
+	display:inline;
+	float:left;
+	position:relative; 
+	margin:0 $gutter_width / 2;
+	width:($column_width + $gutter_width) * $n - $gutter_width;
+}
+@mixin push($n) {
+	position:relative;
+	left:($column_width + $gutter_width) * $n;
+}
+@mixin pull($n) {
+	left:-($column_width + $gutter_width) * $n;
+}
+@mixin prefix($n) {
+	padding-left:($column_width + $gutter_width) * $n;
+}
+@mixin suffix($n) {
+	padding-right:($column_width + $gutter_width) * $n;
+}
+@mixin first(){
+	margin-left:0;
+}
+@mixin last(){
+	margin-right:0;
+}
